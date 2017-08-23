@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ContentPage 
+    Title="Signature Page"
+    xmlns="http://xamarin.com/schemas/2014/forms" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:signature="clr-namespace:SignaturePad.Forms;assembly=SignaturePad.Forms"
+    xmlns:local="clr-namespace:SignatureApplication" 
+    x:Class="SignatureApplication.SignatureApplicationPage">
+    <ContentPage.Content>
+        <StackLayout
+            VerticalOptions="StartAndExpand"
+            Padding="0,20,0,0">
+            <StackLayout
+                HorizontalOptions="Center"
+                BackgroundColor="White">
+                <Label 
+                    Text="Signature Application!"
+                    FontSize="24"
+                    FontFamily="Times New Roman"
+                    FontAttributes="Bold"
+                    TextColor="#2b456d"
+                    />
+                </StackLayout>
+                <StackLayout
+                    VerticalOptions="Center" 
+                    HorizontalOptions="Center"
+                    Padding="10">
+
+                    <signature:SignaturePadView 
+                        x:Name="signaturePad" 
+                        VerticalOptions="FillAndExpand"
+                        HorizontalOptions="FillAndExpand"
+                        BackgroundColor="White"/>
+
+                </StackLayout>
+                <StackLayout
+                    VerticalOptions="End">
+                    <Label 
+                        HorizontalOptions="Center"
+                        Text="Core Computing Solutions Inc."
+                        FontSize="15"
+                        FontFamily="Times New Roman"
+                        TextColor="#2b456d"
+                        />
+                    <Label 
+                        HorizontalOptions="Center"
+                        Text="support@ccscorp.com | ccscorp.com"
+                        FontSize="15"
+                        FontFamily="Times New Roman"
+                        TextColor="#2b456d"
+                        />
+                </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

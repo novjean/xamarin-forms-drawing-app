@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage 
+    Title="SecureSignature"
+    xmlns="http://xamarin.com/schemas/2014/forms" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+    x:Class="SignatureApplication.FailurePage">
+    <Grid
+        Padding="20"
+        RowSpacing="20">
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <StackLayout
+            VerticalOptions="CenterAndExpand"
+            HorizontalOptions="FillAndExpand"
+            Grid.Row="0">
+            <Label
+                x:Name="displayMessage"/>
+        </StackLayout>
+        <StackLayout
+            Grid.Row="1">
+            <Button
+                HorizontalOptions="FillAndExpand"
+                Text="Check Again"
+                Clicked="onCheckAgainClicked"
+            />
+            <Label 
+                HorizontalOptions="Center"
+                Text="Core Computing Solutions Inc."
+                FontSize="15"
+                FontFamily="Times New Roman"
+                TextColor="#2b456d" />
+            <Label 
+                HorizontalOptions="Center"
+                Text="support@ccscorp.com | ccscorp.com"
+                FontSize="15"
+                FontFamily="Times New Roman"
+                TextColor="#2b456d" />
+        </StackLayout>
+    </Grid>
+    
+</ContentPage>
