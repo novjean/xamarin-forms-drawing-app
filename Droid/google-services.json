@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "629955283086",
+    "firebase_url": "https://fir-pushsample-f9533.firebaseio.com",
+    "project_id": "fir-pushsample-f9533",
+    "storage_bucket": "fir-pushsample-f9533.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:629955283086:android:48e2bde4420c30af",
+        "android_client_info": {
+          "package_name": "coreComputingSolutions.SignatureApplication"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "629955283086-tooj1bvvd2dl97iv8jgpvpcl6iq0gt0u.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC0xPaDteqYPSzeJ6m50E74oiBPYeZM8yw"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -8,6 +8,7 @@ namespace SignatureApplication.Models
         //Constructor
         public DeviceInfo()
         {
+            this.key = "";
         }
     }
 }

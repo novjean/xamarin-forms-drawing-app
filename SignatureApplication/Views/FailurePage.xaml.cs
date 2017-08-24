@@ -22,9 +22,10 @@ namespace SignatureApplication
             this.uuid = uuid;
 
             InitializeComponent();
+
+            //Instead of UUID, do we have some ID which is smaller and easier for the support team
             displayMessage.Text = "This device is not active on our network." +
                 "Please contact us and provide the device id: "+ uuid;
-
         }
 
 		void onCheckAgainClicked(object sender, System.EventArgs e)

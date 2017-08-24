@@ -40,6 +40,7 @@
       <DependentUpon>FailurePage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Models\DeviceInfo.cs" />
+    <Compile Include="Models\Api.cs" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App.xaml.cs">
@@ -49,7 +50,6 @@
       <DependentUpon>SignatureApplicationPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Models\ApiToken.cs" />
     <Compile Include="Services\RegistrationIntentService.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -86,6 +86,12 @@
     </Reference>
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\packages\Newtonsoft.Json.10.0.3\lib\portable-net45+win8+wp8+wpa81\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Plugin.FirebasePushNotification.Abstractions">
+      <HintPath>..\packages\Plugin.FirebasePushNotification.1.0.4\lib\portable-net45+wp80+win8+wpa81\Plugin.FirebasePushNotification.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Plugin.FirebasePushNotification">
+      <HintPath>..\packages\Plugin.FirebasePushNotification.1.0.4\lib\portable-net45+wp80+win8+wpa81\Plugin.FirebasePushNotification.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

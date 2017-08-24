@@ -36,9 +36,9 @@ namespace SignatureApplication
             //Generating the custom Unique identifier
             string deviceId=CrossDeviceInfo.Current.Id;
             //Encrypting the Device ID
-            string uuid = EasyEncryption.MD5.ComputeMD5Hash(deviceId);
+            //string uuid = EasyEncryption.MD5.ComputeMD5Hash(deviceId);
             //Temporarily Hardcoded a working uuid
-            //string uuid = "aa9ea3b5f371b0a4adfb5c68f24b95fa";
+            string uuid = "aa9ea3b5f371b0a4adfb5c68f24b95fa";
             //System.Diagnostics.Debug.WriteLine($"UUID: {uuid}");
 
             //OS Specific Implementation (Optional)
@@ -58,7 +58,7 @@ namespace SignatureApplication
             //If device is not registered
             //if (!(_regServ.checkDevice(deviceId))){
             try{
-				if (device.Equals(null))
+                if (device.key.Equals(""))
 				{
 					//Navigate to the failure Page
 					await Navigation.PushAsync(new FailurePage(uuid));
@@ -68,11 +68,11 @@ namespace SignatureApplication
                 }
 
             } catch(NullReferenceException){
+                //Log Error
                 System.Diagnostics.Debug.WriteLine("Null Exception caught");
 				//Navigate to the failure Page
 				await Navigation.PushAsync(new FailurePage(uuid));
             }
-
         }
 
         //Method for when the signature is completed
@@ -123,7 +123,7 @@ namespace SignatureApplication
                 //Where in DB is it updated ?
 
 
-                //Delete local device signature
+                //Delete local device file to save storage on device
                 //Is this optional ?
 
             } catch(NullReferenceException){

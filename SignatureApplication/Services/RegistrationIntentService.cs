@@ -38,14 +38,15 @@ namespace SignatureApplication.Services
                     return null;
                 }
             }
-            System.Diagnostics.Debug.WriteLine("Error: Did not receive a status code." +
-                                               "Returning null");
-            return null;
+            //Returning null is causing null reference exception. Need to find a workaround
+            System.Diagnostics.Debug.WriteLine($"Error: {response.StatusCode}" +
+                                               " Returning blank key");
+            return new DeviceInfo();
         }
 
         private string getUrl()
         {
-            return "https://webcoreapi-central-test.azurewebsites.net/api/Setup/Key?deviceIdentifier=";
+            return new Api().api+"Setup/Key?deviceIdentifier=";
         }
     }
 }
