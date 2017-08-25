@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Plugin.FirebasePushNotification;
+using SignatureApplication.Views;
 using Xamarin.Forms;
 
 namespace SignatureApplication
@@ -13,7 +15,30 @@ namespace SignatureApplication
             InitializeComponent();
 
             MainPage = new NavigationPage(new MainPage(false));
+
+			//FCM Integration
+			CrossFirebasePushNotification.Current.OnTokenRefresh += (s, p) =>
+			{
+				System.Diagnostics.Debug.WriteLine($"TOKEN : {p.Token}");
+				//DisplayAlert("Token", $"Token: {p.Token}", "OK");
+
+			};
+
+           
+
+			//CrossFirebasePushNotification.Current.OnNotificationReceived += (s, p) =>
+            //{
+            //    System.Diagnostics.Debug.WriteLine("Received Notification in App");
+
+            //    MainPage = new SigningPage();
+            //    //DisplayAlert("Received", "Token Received", "OK");
+
+            //};
+
+			
         }
+
+
 
         protected override void OnStart()
         {

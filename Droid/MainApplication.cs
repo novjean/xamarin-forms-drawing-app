@@ -4,6 +4,7 @@ using Android.App;
 using Android.OS;
 using Android.Runtime;
 using Plugin.CurrentActivity;
+using Plugin.FirebasePushNotification;
 
 namespace SignatureApplication.Droid
 {
@@ -19,6 +20,22 @@ namespace SignatureApplication.Droid
         public override void OnCreate()
         {
             base.OnCreate();
+
+			//FCM Integration for PushNotifications
+			//If debug you should reset the token each time.
+            #if DEBUG
+    			FirebasePushNotificationManager.Initialize(this, true);
+            #else
+              FirebasePushNotificationManager.Initialize(this,false);
+            #endif
+
+			//Handle notification when app is closed here
+			CrossFirebasePushNotification.Current.OnNotificationReceived += (s, p) =>
+			{
+
+
+			};
+
             RegisterActivityLifecycleCallbacks(this);
             //A great place to initialize Xamarin.Insights and Dependency Services!
         }

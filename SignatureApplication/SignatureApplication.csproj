@@ -41,6 +41,12 @@
     </Compile>
     <Compile Include="Models\DeviceInfo.cs" />
     <Compile Include="Models\Api.cs" />
+    <EmbeddedResource Include="Views\SigningPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <Compile Include="Views\SigningPage.xaml.cs">
+      <DependentUpon>SigningPage.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App.xaml.cs">

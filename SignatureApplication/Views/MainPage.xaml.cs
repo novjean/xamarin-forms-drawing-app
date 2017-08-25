@@ -1,9 +1,11 @@
 ﻿using System;
-using PCLStorage;
+
 using Plugin.DeviceInfo;
+using Plugin.FirebasePushNotification;
 using SignatureApplication.Models;
 using SignatureApplication.Services;
-using SignaturePad.Forms;
+using SignatureApplication.Views;
+
 using Xamarin.Forms;
 
 //Might need to change the name 
@@ -17,12 +19,45 @@ namespace SignatureApplication
         //Main Constructor
         public MainPage(bool registered)
         {
+            bool getNotified = false;
+            int i = 1;
+
             InitializeComponent();
+
             //Called with registered=false by default, 
             //Better implementation required
             if(!registered){
                verifyDevice();
             }
+
+
+			CrossFirebasePushNotification.Current.OnNotificationReceived += (s, p) =>
+			{
+                getNotified = false;
+                System.Diagnostics.Debug.WriteLine($"getNotified post: {getNotified}");
+                System.Diagnostics.Debug.WriteLine($"Received Notification {i++} in MainPage");
+                getNotified = true;
+
+			};
+
+			CrossFirebasePushNotification.Current.OnNotificationOpened += (s, p) =>
+			{
+				System.Diagnostics.Debug.WriteLine("Opened");
+				foreach (var data in p.Data)
+				{
+					System.Diagnostics.Debug.WriteLine($"{data.Key} : {data.Value}");
+					
+				}
+
+				if (!string.IsNullOrEmpty(p.Identifier))
+				{
+					System.Diagnostics.Debug.WriteLine($"ActionId: {p.Identifier}");
+					
+				}
+
+			};
+
+
         }
 
         //Constructor for Rendering purpose in VS
@@ -76,65 +111,65 @@ namespace SignatureApplication
         }
 
         //Method for when the signature is completed
-        private async void OnSendClicked(object sender, EventArgs e){
+   //     private async void OnSendClicked(object sender, EventArgs e){
 
-            //Accessing file system and creating file
-            var folder = FileSystem.Current.LocalStorage;
+   //         //Accessing file system and creating file
+   //         var folder = FileSystem.Current.LocalStorage;
 
-            //Creating file without limitng the number of files locally
-            //var file = await folder.CreateFileAsync($"signature.png", 
-            //CreationCollisionOption.GenerateUniqueName);
-            //Better implementation. Only one sign file locally being replaced
-            //Whats the file name prefix suffix?
-            var file = await folder.CreateFileAsync("signature.png", 
-                                                    CreationCollisionOption.ReplaceExisting);
-            //Creating the image of signature
-			var settings = new ImageConstructionSettings
-			{
-				BackgroundColor = Color.White,
-				StrokeColor = Color.Black,
-			};
-
-
-            try{
-				using (var stream = await signaturePad.GetImageStreamAsync(SignatureImageFormat.Png, 
-                                                                           settings))
-				using (var fileStream = await file.OpenAsync(FileAccess.ReadAndWrite))
-				{
-                    //Trying to stop the file from being created as blank (Needs work)
-                    if(!stream.Equals(null))
-					    await stream.CopyToAsync(fileStream);
-				}
-
-                //Display Thank you for signing. (Optional)
-				await DisplayAlert("Thank you", 
-                                   "Thanks for signing, " +
-                                   "Your signature has been received.",
-                                   "OK");
-				System.Diagnostics.Debug.WriteLine($"File Path: {file.Path}");
-                //Clear the signature from pad after the file is saved.
-                signaturePad.Clear();
-
-                //Push to S3
-                //AWS VS Toolkit. Needs research.
-                //AWS Credentials - Account Number, Secret Key and one more
-                //Bucket(s) name(s)
-                //File Name to be stored in
-                //Where in DB is it updated ?
+   //         //Creating file without limitng the number of files locally
+   //         //var file = await folder.CreateFileAsync($"signature.png", 
+   //         //CreationCollisionOption.GenerateUniqueName);
+   //         //Better implementation. Only one sign file locally being replaced
+   //         //Whats the file name prefix suffix?
+   //         var file = await folder.CreateFileAsync("signature.png", 
+   //                                                 CreationCollisionOption.ReplaceExisting);
+   //         //Creating the image of signature
+			//var settings = new ImageConstructionSettings
+			//{
+			//	BackgroundColor = Color.White,
+			//	StrokeColor = Color.Black,
+			//};
 
 
-                //Delete local device file to save storage on device
-                //Is this optional ?
+    //        try{
+				//using (var stream = await signaturePad.GetImageStreamAsync(SignatureImageFormat.Png, 
+    //                                                                       settings))
+				//using (var fileStream = await file.OpenAsync(FileAccess.ReadAndWrite))
+				//{
+    //                //Trying to stop the file from being created as blank (Needs work)
+    //                if(!stream.Equals(null))
+				//	    await stream.CopyToAsync(fileStream);
+				//}
 
-            } catch(NullReferenceException){
-                //Log Error here
-                System.Diagnostics.Debug.WriteLine("Null Reference Exception caught");
-                await DisplayAlert("Error", "Please sign.", "OK");
-            } catch(Exception){
-                //Log error
-                await DisplayAlert("Oops!", $"Something went wrong. Please make " +
-                                   "sure to sign.", "OK");
-            }
-        }
+    //            //Display Thank you for signing. (Optional)
+				//await DisplayAlert("Thank you", 
+    //                               "Thanks for signing, " +
+    //                               "Your signature has been received.",
+    //                               "OK");
+				//System.Diagnostics.Debug.WriteLine($"File Path: {file.Path}");
+        //        //Clear the signature from pad after the file is saved.
+        //        signaturePad.Clear();
+
+        //        //Push to S3
+        //        //AWS VS Toolkit. Needs research.
+        //        //AWS Credentials - Account Number, Secret Key and one more
+        //        //Bucket(s) name(s)
+        //        //File Name to be stored in
+        //        //Where in DB is it updated ?
+
+
+        //        //Delete local device file to save storage on device
+        //        //Is this optional ?
+
+        //    } catch(NullReferenceException){
+        //        //Log Error here
+        //        System.Diagnostics.Debug.WriteLine("Null Reference Exception caught");
+        //        await DisplayAlert("Error", "Please sign.", "OK");
+        //    } catch(Exception){
+        //        //Log error
+        //        await DisplayAlert("Oops!", $"Something went wrong. Please make " +
+        //                           "sure to sign.", "OK");
+        //    }
+        //}
     }
 }

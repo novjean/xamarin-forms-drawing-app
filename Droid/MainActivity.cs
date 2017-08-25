@@ -7,6 +7,7 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using Android.OS;
+using Plugin.FirebasePushNotification;
 
 namespace SignatureApplication.Droid
 {
@@ -23,6 +24,9 @@ namespace SignatureApplication.Droid
             global::Xamarin.Forms.Forms.Init(this, bundle);
 
             LoadApplication(new App());
+
+            //FCM Integration
+            FirebasePushNotificationManager.ProcessIntent(Intent);
         }
     }
 }
