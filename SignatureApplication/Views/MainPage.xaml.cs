@@ -19,8 +19,6 @@ namespace SignatureApplication
         //Main Constructor
         public MainPage(bool registered)
         {
-            bool getNotified = false;
-            int i = 1;
 
             InitializeComponent();
 
@@ -30,14 +28,14 @@ namespace SignatureApplication
                verifyDevice();
             }
 
-
+            int i = 1;
 			CrossFirebasePushNotification.Current.OnNotificationReceived += (s, p) =>
 			{
-                getNotified = false;
-                System.Diagnostics.Debug.WriteLine($"getNotified post: {getNotified}");
                 System.Diagnostics.Debug.WriteLine($"Received Notification {i++} in MainPage");
-                getNotified = true;
-
+				Device.BeginInvokeOnMainThread(() =>
+				{
+                    Navigation.PushAsync(new SigningPage());
+				});
 			};
 
 			CrossFirebasePushNotification.Current.OnNotificationOpened += (s, p) =>
@@ -46,7 +44,6 @@ namespace SignatureApplication
 				foreach (var data in p.Data)
 				{
 					System.Diagnostics.Debug.WriteLine($"{data.Key} : {data.Value}");
-					
 				}
 
 				if (!string.IsNullOrEmpty(p.Identifier))
@@ -56,7 +53,6 @@ namespace SignatureApplication
 				}
 
 			};
-
 
         }
 

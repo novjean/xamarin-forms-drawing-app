@@ -32,7 +32,7 @@
             <Button
                 HorizontalOptions="FillAndExpand"
                 Text="Send"
-                Clicked="Handle_Clicked"
+                Clicked="OnSendClicked"
             />
             <Label 
                 HorizontalOptions="Center"

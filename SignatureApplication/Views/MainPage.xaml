@@ -13,7 +13,7 @@
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
         <Label 
-            Text="SecureeSignature"
+            Text="SecureSignature"
             FontSize="24"
             FontAttributes="Bold"
             HorizontalOptions="CenterAndExpand"
@@ -27,6 +27,11 @@
             VerticalOptions="FillAndExpand"
             HorizontalOptions="FillAndExpand"
             Grid.Row="0" />-->
+        <Label
+            Text="Test"
+            x:Name="testLabel"
+            IsVisible="false"
+            />
 
  
 

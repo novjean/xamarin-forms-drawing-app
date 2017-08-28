@@ -8,10 +8,6 @@ namespace SignatureApplication.Views
 {
     public partial class SigningPage : ContentPage
     {
-        void Handle_Clicked(object sender, System.EventArgs e)
-        {
-            throw new NotImplementedException();
-        }
 
         public SigningPage()
         {
