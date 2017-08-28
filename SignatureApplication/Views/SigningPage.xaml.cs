@@ -55,6 +55,7 @@ namespace SignatureApplication.Views
 				System.Diagnostics.Debug.WriteLine($"File Path: {file.Path}");
 				//Clear the signature from pad after the file is saved.
 				signaturePad.Clear();
+                await Navigation.PopAsync();
 
 				//Push to S3
 				//AWS VS Toolkit. Needs research.
